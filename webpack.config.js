@@ -27,7 +27,7 @@ const config = {
   },
   output: {
     filename: "h5p-textordering.js",
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "package/H5P.TextOrdering/dist"),
   },
   resolve: {
     extensions: [".ts", ".js", ".json"],

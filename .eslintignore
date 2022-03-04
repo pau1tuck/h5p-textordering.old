@@ -1,5 +1,6 @@
-webpack.config.js
-glob.ts
 bkp.ts
 dist/
+glob.ts
 package/
+TODO.md
+webpack.config.js

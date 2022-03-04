@@ -89,7 +89,8 @@ out
 
 # Nuxt.js build / generate output
 .nuxt
-dist
+dist/
+package/H5P.TextOrdering/dist
 
 # Gatsby files
 .cache/
