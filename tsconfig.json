@@ -22,6 +22,7 @@
         "src/**/*.tsx",
         "src/**/*.js",
         "src/**/*.jsx",
+        "global.d.ts",
     ],
     "exclude": [
         "node_modules",

@@ -1,7 +1,9 @@
 /**
  * The H5P content type class.
  */
-export default class TextOrdering extends H5P.EventDispatcher {
+export default class TextOrdering extends (H5P.EventDispatcher as {
+  new (): any;
+}) {
   /**
    * @constructor
    *
