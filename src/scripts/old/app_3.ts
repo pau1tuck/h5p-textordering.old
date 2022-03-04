@@ -28,9 +28,6 @@ H5P.TextOrdering = (($: any, Question: any) => {
     );
     console.log(params);
     console.log($);
-    // saves the content id
-    this.contentId = contentId;
-    this.contentData = contentData;
   };
 
   TextOrdering.prototype = Object.create(Question.prototype);

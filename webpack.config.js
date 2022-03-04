@@ -1,91 +1,91 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const MinifyPlugin = require("babel-minify-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 
 const nodeEnv = process.env.NODE_ENV || "development";
-const isDev = nodeEnv !== "production";
+const isProd = nodeEnv === "production";
 
-const config = {
+module.exports = {
   mode: nodeEnv,
   optimization: {
-    minimizer: [new OptimizeCSSAssetsPlugin({})],
+    minimize: isProd,
+    innerGraph: true,
+    usedExports: true,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          compress: {
+            drop_console: true,
+          },
+        },
+      }),
+    ],
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "h5p-textordering.css",
+      filename: "main.css",
+      path: path.resolve(__dirname, "src/css"),
     }),
-    new MinifyPlugin(
-      {},
-      {
-        sourceMap: isDev,
-      },
-    ),
   ],
   entry: {
     dist: "./src/entries/main.ts",
   },
   output: {
     filename: "h5p-textordering.js",
-    path: path.resolve(__dirname, "package/H5P.TextOrdering/dist"),
+    path: path.resolve(__dirname, "dist"),
   },
-  resolve: {
-    extensions: [".ts", ".js", ".json"],
-  },
+  target: ["web", "es5"], // IE11
   module: {
     rules: [
       {
-        test: /\.(ts|js)$/,
-        include: path.resolve(__dirname, "src"),
+        test: /\.tsx?$/,
+        use: [
+          {
+            loader: "ts-loader",
+          },
+          {
+            loader: "webpack-remove-code-blocks",
+          },
+        ],
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
         loader: "babel-loader",
       },
       {
-        /*
-        test: /\.scss$/,
-        include: path.resolve(__dirname, "src/scss"),
-        use: ["style-loader", "css-loader", "sass-loader"], */
-        test: /\.css$/,
-        include: path.resolve(__dirname, "src/css"),
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
+        test: /\.(s[ac]ss|css)$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: "",
+            },
+          },
+          { loader: "css-loader" },
+          {
+            loader: "sass-loader",
+          },
+        ],
       },
       {
-        test: /\.jpg|\.jpeg|\.png$|\.svg/,
+        test: /\.svg|\.jpg|\.png$/,
         include: path.join(__dirname, "src/assets/images"),
-        use: [
-          {
-            loader: "url-loader",
-            options: {
-              limit: 1000,
-              name: "assets/images/[name].[ext]",
-            },
-          },
-        ],
+        type: "asset/resource",
       },
       {
-        test: /\.(woff|woff2|eot|ttf|otf|svg)$/,
-        include: path.resolve(__dirname, "src/assets/fonts"),
-        use: [
-          {
-            loader: "url-loader",
-            options: {
-              limit: 1000,
-              name: "assets/fonts/[name].[ext]",
-            },
-          },
-        ],
+        test: /\.woff$/,
+        include: path.join(__dirname, "src/assets/fonts"),
+        type: "asset/resource",
       },
     ],
   },
-  externals: {
-    jquery: "H5P.jQuery",
+  resolve: {
+    extensions: [".tsx", ".ts", ".js"],
   },
   stats: {
     colors: true,
   },
+  devtool: isProd ? undefined : "eval-cheap-module-source-map",
 };
-
-if (isDev) {
-  config.devtool = "inline-source-map";
-}
-
-module.exports = config;

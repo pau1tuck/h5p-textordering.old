@@ -1,16 +1,16 @@
 /* eslint-disable no-console */
 /* eslint-disable func-names */
-H5P.TextSequencing = ((EventDispatcher: any, $: JQuery, UI: any) => {
+H5P.TextOrdering = (($: JQuery, EventDispatcher: any, UI: any) => {
   /**
    * Text Sequencing Constructor
 
-   * @class H5P.TextSequencing
+   * @class H5P.TextOrdering
    * @extends H5P.EventDispatcher
    * @param {Object} params // parameters from semantics.json
    * @param {Number} id     // unique ID given by the platform
    */
-  const TextSequencing = (params: any, id: number) => {
-    /** @alias H5P.TextSequencing */
+  const TextOrdering = (params: any, id: number) => {
+    /** @alias H5P.TextOrdering */
 
     // Initialize event inheritance
     EventDispatcher.call(this);
@@ -40,11 +40,11 @@ H5P.TextSequencing = ((EventDispatcher: any, $: JQuery, UI: any) => {
    *
    *  @param {H5P.jQuery} $container
    */
-  TextSequencing.prototype.attach = ($container: JQuery): void => {
+  TextOrdering.prototype.attach = ($container: JQuery): void => {
     $container.append("<p>Anus</p>");
   };
 
-  return TextSequencing;
+  return TextOrdering;
 })(H5P.EventDispatcher, H5P.jQuery, H5P.JoubelUI);
 
 export default {};

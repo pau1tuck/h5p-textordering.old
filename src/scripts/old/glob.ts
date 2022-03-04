@@ -19,7 +19,7 @@
  * H5P but only added for the typings.
  */
 declare namespace H5P {
-  let TextSequencing: any;
+  let TextOrdering: any;
   let JoubelUI: any;
   /**
    * The base of the event system.

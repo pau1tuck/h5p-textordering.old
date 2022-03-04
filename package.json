@@ -6,13 +6,16 @@
   "scripts": {
     "dev": "webpack NODE_ENV='development' webpack --mode=development --watch",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cross-env NODE_ENV='production' webpack --mode=production && cp library.json ./package/H5P.TextOrdering/ && cp semantics.json ./package/H5P.TextOrdering/ && rm ./package/TextOrdering.h5p && cd package && zip -r -D -X TextOrdering.h5p *"
+    "build": "cross-env NODE_ENV='production' webpack --mode=production && cp library.json ./package/H5P.TextOrdering/ && cp semantics.json ./package/H5P.TextOrdering/ && cp ./dist/* ./package/H5P.TextOrdering/dist/ && rm ./package/TextOrdering.h5p && cd package && zip -r -D -X TextOrdering.h5p *"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pau1tuck/h5p-page"
   },
-  "keywords": ["h5p", "library"],
+  "keywords": [
+    "h5p",
+    "library"
+  ],
   "author": "Paul Tuck @pau1tuck",
   "license": "MIT",
   "devDependencies": {
@@ -42,6 +45,7 @@
     "prettier": "^2.5.1",
     "prettier-eslint": "^13.0.0",
     "sass-loader": "^12.4.0",
+    "terser-webpack-plugin": "^5.3.1",
     "typescript": "^4.5.5",
     "webpack": "^5.68.0",
     "webpack-cli": "^4.9.2"

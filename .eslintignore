@@ -1,6 +1,6 @@
 bkp.ts
 dist/
-glob.ts
+global.d.ts
 package/
 TODO.md
 webpack.config.js

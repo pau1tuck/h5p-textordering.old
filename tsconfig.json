@@ -2,6 +2,7 @@
     "compilerOptions": {
         "module": "commonjs",
         "target": "es5",
+        "jsx": "preserve",
         "noEmit": true,
         "sourceMap": true,
         "strict": true,
@@ -17,9 +18,10 @@
         "strictNullChecks": true,
     },
     "include": [
-        "**/*.ts",
-        "**/*.js",
-        ".eslintrc.js",
+        "src/**/*.ts",
+        "src/**/*.tsx",
+        "src/**/*.js",
+        "src/**/*.jsx",
     ],
     "exclude": [
         "node_modules",
