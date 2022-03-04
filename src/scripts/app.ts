@@ -1,5 +1,6 @@
+const instanceId = 0;
 class TextOrdering extends (H5P.EventDispatcher as { new (): any }) {
-  private jQuery;
+  private jQuery: any;
   private answered = false;
   /**
    * Constructor for Simple Multiple Choice
@@ -11,9 +12,9 @@ class TextOrdering extends (H5P.EventDispatcher as { new (): any }) {
    */
   constructor(
     params: any,
-    { question, listItems = [], inputType }: any,
-    contentId = 0,
-    contentData = {},
+    { question, items = [], inputType }: any,
+    contentId: number | any = 0,
+    contentData: object = {},
   ) {
     super();
 
@@ -21,7 +22,7 @@ class TextOrdering extends (H5P.EventDispatcher as { new (): any }) {
     this.listItems = [];
 
     // Keep track of the state
-    this.state = listItems.map((alt: string, i: number) => {
+    this.state = items.map((alt: string, i: number) => {
       return {
         id: i,
         text: alt,
@@ -33,45 +34,8 @@ class TextOrdering extends (H5P.EventDispatcher as { new (): any }) {
      * @param {jQuery} $wrapper
      */
     this.attach = ($wrapper: any) => {
-      const element = document.createElement("div");
-      element.className = "h5p-simple-multiple-choice";
-      const questionElement = document.createElement("div");
-      questionElement.classList.add("h5p-simple-multiple-choice-question");
-      questionElement.classList.add("h5p-subcontent-question");
-      const questionText = this.createQuestion(this.uniqueName);
-      questionElement.appendChild(questionText);
-
-      element.appendChild(questionElement);
-
-      $wrapper.get(0).appendChild(element);
+      $wrapper.get(0).append("<p>MyAnus</p>");
     };
-    /**
-     * Create html for multiple choice
-     * @return {HTMLElement} html for multiple choice
-     */
-    this.createQuestion = (id: string): HTMLElement => {
-      const questionElement = document.createElement("div");
-      questionElement.id = id;
-      questionElement.innerHTML = question;
-      return questionElement;
-    };
-
-    params = $.extend(
-      true,
-      {
-        question: "No question text provided",
-        content: {
-          blanksText: "",
-        },
-        behaviour: {
-          mode: "typing",
-          selectAlternatives: "alternatives",
-        },
-      },
-      params,
-    );
-    this.jQuery = H5P.jQuery;
-    this.contentId = contentId;
   }
 }
 
