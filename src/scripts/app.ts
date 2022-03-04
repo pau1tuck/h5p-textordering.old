@@ -1,42 +1,32 @@
 const instanceId = 0;
-class TextOrdering extends (H5P.EventDispatcher as { new (): any }) {
-  private jQuery: any;
-  private answered = false;
+export default class TextOrdering extends H5P.EventDispatcher {
   /**
-   * Constructor for Simple Multiple Choice
-   * @param {string} question Question text
-   * @param {string} inputType vertical or horizontal
-   * @param {Array} alternatives Array of strings with answers alternatives
-   * @param {number|*} contentId
-   * @param {Object} contentData
+   * @constructor
+   *
+   * @param {object} params Parameters passed by the editor.
+   * @param {number} contentId Content's id.
+   * @param {object} [extras] Saved state, metadata, etc.
    */
   constructor(
     params: any,
-    { question, items = [], inputType }: any,
-    contentId: number | any = 0,
-    contentData: object = {},
+    // { question, items = [], inputType }: any,
+    contentId: string | null = null,
+    extras = [],
   ) {
     super();
 
     // The <li> alternatives, so we can easily append feedback to them
     this.listItems = [];
 
-    // Keep track of the state
-    this.state = items.map((alt: string, i: number) => {
-      return {
-        id: i,
-        text: alt,
-      };
-    });
+    this.element = document.createElement("div");
+    this.element.innertext = params.question;
 
     /**
      * Attach library to wrapper
      * @param {jQuery} $wrapper
      */
-    this.attach = ($wrapper: any) => {
-      $wrapper.get(0).append("<p>MyAnus</p>");
+    this.attach = ($wrapper: JQuery): void => {
+      $wrapper.get(0)?.append("<p>FUCK SAKE!</p>");
     };
   }
 }
-
-export default TextOrdering;

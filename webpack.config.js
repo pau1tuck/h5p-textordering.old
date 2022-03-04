@@ -23,7 +23,7 @@ const config = {
     ),
   ],
   entry: {
-    dist: "./src/scripts/app.ts",
+    dist: "./src/entries/main.ts",
   },
   output: {
     filename: "h5p-textordering.js",
